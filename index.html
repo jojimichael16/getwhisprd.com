@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Whispr - Talk Freely. Connect Deeply.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Whispr - Chat with someone new. Connect for real. Unlock more together.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(180deg, #1A1035 0%, #0d0821 100%);
+    color: #fff;
+    min-height: 100vh;
+  }
+  .container { max-width: 1000px; margin: 0 auto; padding: 24px; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+  }
+  .logo { font-size: 24px; font-weight: 600; letter-spacing: 2px; }
+  .logo span { color: #E8618C; }
+  nav a {
+    color: #cbb8f0;
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 14px;
+  }
+  .hero {
+    text-align: center;
+    padding: 80px 20px 60px;
+  }
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    background: linear-gradient(90deg, #8B5CF6, #E8618C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 18px;
+    color: #cbb8f0;
+    max-width: 500px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, #8B5CF6, #E8618C);
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35);
+    transition: transform 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin: 60px 0;
+  }
+  .feature-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .feature-card .icon { font-size: 36px; margin-bottom: 12px; }
+  .feature-card h3 { font-size: 17px; margin-bottom: 8px; }
+  .feature-card p { font-size: 14px; color: #b8a8d9; line-height: 1.5; }
+  .whispr-highlight {
+    background: rgba(232, 97, 140, 0.08);
+    border: 1px solid rgba(232, 97, 140, 0.25);
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+    margin: 60px 0;
+  }
+  .whispr-highlight h2 { font-size: 26px; margin-bottom: 12px; color: #fff; }
+  .whispr-highlight p { color: #cbb8f0; max-width: 480px; margin: 0 auto; line-height: 1.6; }
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #7a6a99;
+    font-size: 13px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 40px;
+  }
+  footer a { color: #b8a8d9; text-decoration: none; margin: 0 12px; }
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 32px; }
+    nav a { margin-left: 12px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo">whispr <span>🕊️</span></div>
+    <nav>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="mailto:hello@getwhisprd.com">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Talk Freely.<br>Connect Deeply.</h1>
+    <p>Meet someone new. Chat freely. When you both feel a real connection, Whispr each other and unlock a little more.</p>
+    <div class="cta-buttons">
+      <a href="https://play.google.com/store/apps/details?id=com.whispr.app" class="btn-primary">
+        ▶ Get it on Google Play
+      </a>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <div class="icon">💬</div>
+      <h3>Real Conversations</h3>
+      <p>Match with someone new and start chatting instantly — no profile stalking, just conversation first.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔒</div>
+      <h3>Private by Design</h3>
+      <p>Messages are end-to-end encrypted. Random chats disappear when they end — nothing lingers.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🕊️</div>
+      <h3>Whispr to Connect</h3>
+      <p>Feel a spark? Whispr them. If it's mutual, you both unlock each other's full profile.</p>
+    </div>
+  </section>
+
+  <section class="whispr-highlight">
+    <h2>🕊️ The Whispr Moment</h2>
+    <p>Nobody knows who's Whispr'd them until it's mutual. When two people Whispr each other, something clicks — and a little pigeon flies across the chat to let you know.</p>
+  </section>
+
+  <footer>
+    <p>© 2026 [Your Firm Name]. All rights reserved.</p>
+    <div style="margin-top: 12px;">
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
+      <a href="mailto:support@getwhisprd.com">Support</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
