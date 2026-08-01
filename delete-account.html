@@ -21,6 +21,11 @@
   .steps { counter-reset: step; list-style: none; padding-left: 0; }
   .steps li { counter-increment: step; margin-bottom: 12px; padding-left: 36px; position: relative; }
   .steps li::before { content: counter(step); position: absolute; left: 0; top: 0; background: #6B35D9; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+  .status-msg { margin-top: 16px; padding: 14px; border-radius: 8px; font-size: 14px; display: none; }
+  .status-msg.success { background: #eafbf0; color: #1e6b41; border: 1px solid #b8e6c8; display: block; }
+  .status-msg.error { background: #fff0f0; color: #c0392b; border: 1px solid #f0c0c0; display: block; }
+  .status-msg.loading { background: #f0f0f0; color: #555; border: 1px solid #ddd; display: block; }
+  .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 </style>
 </head>
 <body>
@@ -74,31 +79,56 @@
     <label for="reason">Reason for deletion (optional, helps us improve)</label>
     <textarea id="reason" rows="3" placeholder="Optional feedback"></textarea>
 
-    <button type="submit" class="btn">Request Account Deletion</button>
+    <button type="submit" class="btn" id="submitBtn">Request Account Deletion</button>
+    <div id="statusMsg" class="status-msg"></div>
   </form>
 </div>
 
-<p style="margin-top:24px; font-size: 14px; color:#666;">Prefer to email us directly? Write to <a href="mailto:privacy@getwhisprd.com">privacy@getwhisprd.com</a> with the subject line "Account Deletion Request" and the email address linked to your account.</p>
+<p style="margin-top:24px; font-size: 14px; color:#666;">Prefer to email us directly instead? Write to <a href="mailto:privacy@getwhisprd.com?subject=Account%20Deletion%20Request">privacy@getwhisprd.com</a> with the subject line "Account Deletion Request" and the email address linked to your account.</p>
 
 <script>
-document.getElementById('deleteForm').addEventListener('submit', function(e) {
+const DELETION_ENDPOINT = 'https://us-central1-whispr-17d5b.cloudfunctions.net/submitWebAccountDeletionRequest';
+
+document.getElementById('deleteForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const name = document.getElementById('fullname').value || 'Not provided';
-  const email = document.getElementById('email').value;
-  const username = document.getElementById('username').value || 'Not provided';
-  const reason = document.getElementById('reason').value || 'Not provided';
 
-  const subject = encodeURIComponent('Account Deletion Request');
-  const body = encodeURIComponent(
-    `Account Deletion Request\n\n` +
-    `Name: ${name}\n` +
-    `Email linked to account: ${email}\n` +
-    `Username: ${username}\n` +
-    `Reason: ${reason}\n\n` +
-    `I confirm I am requesting permanent deletion of my Whispr account and understand this follows the 30-day grace period process described on this page.`
-  );
+  const submitBtn = document.getElementById('submitBtn');
+  const statusMsg = document.getElementById('statusMsg');
+  const email = document.getElementById('email').value.trim();
+  const fullname = document.getElementById('fullname').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const reason = document.getElementById('reason').value.trim();
 
-  window.location.href = `mailto:privacy@getwhisprd.com?subject=${subject}&body=${body}`;
+  if (!email) {
+    statusMsg.className = 'status-msg error';
+    statusMsg.textContent = 'Please enter the email address linked to your account.';
+    return;
+  }
+
+  submitBtn.disabled = true;
+  statusMsg.className = 'status-msg loading';
+  statusMsg.textContent = 'Submitting your request…';
+
+  try {
+    const response = await fetch(DELETION_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, fullname, username, reason })
+    });
+
+    if (!response.ok) {
+      throw new Error('Request failed');
+    }
+
+    statusMsg.className = 'status-msg success';
+    statusMsg.textContent = 'Your deletion request has been submitted. We will verify it against our records and follow up at the email address you provided before any action is taken.';
+    document.getElementById('deleteForm').reset();
+  } catch (err) {
+    statusMsg.className = 'status-msg error';
+    statusMsg.innerHTML = 'Something went wrong submitting your request. Please try again, or email us directly at <a href="mailto:privacy@getwhisprd.com?subject=Account%20Deletion%20Request">privacy@getwhisprd.com</a>.';
+  } finally {
+    submitBtn.disabled = false;
+  }
 });
 </script>
 
