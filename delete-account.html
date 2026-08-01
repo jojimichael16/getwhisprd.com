@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Whispr - Delete Your Account</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 720px; margin: 0 auto; padding: 24px; line-height: 1.6; color: #1a1a1a; background: #FAF7F0; }
+  h1 { color: #6B35D9; }
+  h2 { color: #6B35D9; margin-top: 32px; font-size: 20px; }
+  a { color: #6B35D9; }
+  .updated { color: #666; font-size: 14px; }
+  ul { padding-left: 20px; }
+  .warning-box { background: #fff3f0; border-left: 4px solid #e8618c; padding: 16px; border-radius: 4px; margin: 20px 0; }
+  .retain-box { background: #f0f4ff; border-left: 4px solid #6B35D9; padding: 16px; border-radius: 4px; margin: 20px 0; }
+  .form-box { background: #ffffff; border: 1px solid #e5ddf0; border-radius: 16px; padding: 24px; margin-top: 24px; }
+  label { display: block; font-weight: 600; margin-top: 16px; margin-bottom: 6px; font-size: 14px; }
+  input, textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 15px; font-family: inherit; }
+  .btn { display: inline-block; background: #6B35D9; color: #fff; padding: 14px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; margin-top: 20px; border: none; cursor: pointer; font-size: 16px; }
+  .steps { counter-reset: step; list-style: none; padding-left: 0; }
+  .steps li { counter-increment: step; margin-bottom: 12px; padding-left: 36px; position: relative; }
+  .steps li::before { content: counter(step); position: absolute; left: 0; top: 0; background: #6B35D9; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>🕊️ Delete Your Whispr Account</h1>
+<p class="updated">You can request deletion of your Whispr account and associated data from here, without needing the app installed.</p>
+
+<h2>How it works</h2>
+<ol class="steps">
+  <li>Submit the request form below using the email address associated with your Whispr account.</li>
+  <li>We verify the request is genuinely yours and initiate deletion, matching the same process used when deleting your account from within the app.</li>
+  <li>Your account enters a <strong>30-day grace period</strong>. During this time, if you log back into the app, you'll be offered the option to restore your account.</li>
+  <li>If you do not log back in within 30 days, your account and data are <strong>permanently deleted</strong> and cannot be recovered.</li>
+</ol>
+
+<div class="warning-box">
+  <strong>This action cannot be undone after the 30-day grace period.</strong> If you're unsure, you can also request deletion directly from within the app via Profile → Settings → Delete Account, which follows the identical process.
+</div>
+
+<h2>What gets deleted</h2>
+<ul>
+  <li>Your profile, including username, bio, interests, and profile photo</li>
+  <li>Your gallery photos</li>
+  <li>Your conversations and messages</li>
+  <li>Your Whispr connections</li>
+  <li>Your presence and account activity data</li>
+</ul>
+
+<h2>What we retain, and why</h2>
+<div class="retain-box">
+  <p>Consistent with our <a href="/privacy.html">Privacy Policy</a>, we retain a limited record of any reports or moderation actions involving your account for up to 12 months after deletion, even once your account itself is removed. This is necessary to maintain the safety of our community and to meet our obligations under our <a href="/terms.html">Terms of Service</a> and applicable child safety laws. This retained record does not include your profile, photos, or message content.</p>
+</div>
+
+<h2>Request deletion</h2>
+<div class="retain-box">
+  <p><strong>Verification:</strong> To protect your account from unauthorized deletion requests, we check every request against our records before taking any action. We will only proceed once we've confirmed the request genuinely comes from the email address associated with the account — for example, by replying to you at that address for confirmation. We will never delete an account based solely on someone else providing your email or username.</p>
+</div>
+<div class="form-box">
+  <p>Fill in the details below. This will open your email app with a pre-filled deletion request addressed to our support team.</p>
+
+  <form id="deleteForm">
+    <label for="fullname">Your name (as registered, optional)</label>
+    <input type="text" id="fullname" placeholder="Jane Doe">
+
+    <label for="email">Email address linked to your Whispr account *</label>
+    <input type="email" id="email" required placeholder="you@example.com">
+
+    <label for="username">Your Whispr username (if known)</label>
+    <input type="text" id="username" placeholder="e.g. BrightWolf11">
+
+    <label for="reason">Reason for deletion (optional, helps us improve)</label>
+    <textarea id="reason" rows="3" placeholder="Optional feedback"></textarea>
+
+    <button type="submit" class="btn">Request Account Deletion</button>
+  </form>
+</div>
+
+<p style="margin-top:24px; font-size: 14px; color:#666;">Prefer to email us directly? Write to <a href="mailto:privacy@getwhisprd.com">privacy@getwhisprd.com</a> with the subject line "Account Deletion Request" and the email address linked to your account.</p>
+
+<script>
+document.getElementById('deleteForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('fullname').value || 'Not provided';
+  const email = document.getElementById('email').value;
+  const username = document.getElementById('username').value || 'Not provided';
+  const reason = document.getElementById('reason').value || 'Not provided';
+
+  const subject = encodeURIComponent('Account Deletion Request');
+  const body = encodeURIComponent(
+    `Account Deletion Request\n\n` +
+    `Name: ${name}\n` +
+    `Email linked to account: ${email}\n` +
+    `Username: ${username}\n` +
+    `Reason: ${reason}\n\n` +
+    `I confirm I am requesting permanent deletion of my Whispr account and understand this follows the 30-day grace period process described on this page.`
+  );
+
+  window.location.href = `mailto:privacy@getwhisprd.com?subject=${subject}&body=${body}`;
+});
+</script>
+
+</body>
+</html>
